@@ -74,7 +74,6 @@ export default function AdminFeedbackTable({ posts }: { posts: any[] }) {
                 throw new Error("Failed to update status");
             }
 
-            // Dismiss the loading toast
             toast.dismiss(loadingToast);
             toast.success("Feedback status updated successfully!");
             setEditingPostId(null);

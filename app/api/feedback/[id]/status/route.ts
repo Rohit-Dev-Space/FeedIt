@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const dbUser = await syncCurrentUser();
@@ -14,14 +14,7 @@ export async function PATCH(
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
 
-        // Admin check
-        const user = await prisma.user.findUnique({
-            where: {
-                clerkUserId: dbUser.id.toString(),
-            },
-        });
-
-        if (!user || user.role !== "admin") {
+        if (dbUser.role !== "admin") {
             return NextResponse.json(
                 { error: "Admin access required" },
                 { status: 403 }
@@ -29,10 +22,10 @@ export async function PATCH(
         }
 
         const { status } = await request.json();
-        const { id } = params;
-        const numericPostId = Number(id);
+        const { id } = await params;           // ✅ FIX
+        const postId = Number(id);
 
-        if (Number.isNaN(numericPostId)) {
+        if (Number.isNaN(postId)) {
             return NextResponse.json(
                 { error: "Invalid post ID" },
                 { status: 400 }
@@ -47,7 +40,7 @@ export async function PATCH(
         }
 
         const updatedPost = await prisma.post.update({
-            where: { id: numericPostId },
+            where: { id: postId },
             data: { status },
             include: {
                 author: true,
