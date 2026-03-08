@@ -20,7 +20,7 @@ export default function Navbar() {
                 <div className="flex items-center gap-6 space-x-10">
                     <Link href="/">
                         <div className="flex items-center gap-3">
-                            <div className="h-8 w-8 rounded-lg bg-linear-to-r from-teal-700 via-green-300 to-yellow-400 flex items-center justify-center">
+                            <div className="h-8 w-8 rounded-lg bg-linear-to-r from-teal-700 to-yellow-400 flex items-center justify-center">
                                 <VscFeedback />
                             </div>
                             <span className="text-xl font-bold">FeedIt</span>
