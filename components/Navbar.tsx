@@ -10,6 +10,8 @@ import {
     UserButton,
 } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
+import { VscFeedback } from "react-icons/vsc";
+
 
 export default function Navbar() {
     return (
@@ -19,7 +21,7 @@ export default function Navbar() {
                     <Link href="/">
                         <div className="flex items-center gap-3">
                             <div className="h-8 w-8 rounded-lg bg-linear-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                                <Sparkle className="h-4 w-4 text-white" />
+                                <VscFeedback />
                             </div>
                             <span className="text-xl font-bold">FeedIt</span>
                         </div>
