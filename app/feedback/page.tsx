@@ -16,7 +16,6 @@ import { Badge } from "@/components/ui/badge";
 import FeedbackList from "@/components/feedback-list";
 
 export default async function FeedbackPage() {
-    // Get the useId from clerk auth
     const { userId } = await auth();
 
     const posts = await prisma.post.findMany({
@@ -65,7 +64,6 @@ export default async function FeedbackPage() {
                 </GradientHeader>
 
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                    {/* Sidebar */}
                     <div className="lg:col-span-1 space-y-6">
                         <Card>
                             <CardHeader>
@@ -106,7 +104,6 @@ export default async function FeedbackPage() {
                             </CardContent>
                         </Card>
                     </div>
-                    {/* Main Content */}
                     <div className="lg:col-span-3">
                         <FeedbackList initialPosts={posts} userId={userId} />
                     </div>

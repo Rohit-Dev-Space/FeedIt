@@ -23,7 +23,6 @@ import {
 } from "./ui/select";
 import { toast } from "sonner";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export default function AdminFeedbackTable({ posts }: { posts: any[] }) {
     const [editingPostId, setEditingPostId] = useState<number | null>(null);
     const [postStatus, setPostStatus] = useState<Record<number, string>>(
@@ -59,7 +58,6 @@ export default function AdminFeedbackTable({ posts }: { posts: any[] }) {
     };
 
     const saveStatus = async (postId: number) => {
-        // Show loading toast
         const loadingToast = toast.loading("Saving status...");
         try {
             const response = await fetch(`/api/feedback/${postId}/status`, {

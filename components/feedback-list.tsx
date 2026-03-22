@@ -15,7 +15,6 @@ import { getCategoryDesign } from "@/app/data/category-data";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export default function FeedbackList({
     initialPosts,
     userId,
@@ -31,7 +30,6 @@ export default function FeedbackList({
             return;
         }
 
-        // Show loading toast
         const loadingToast = toast.loading("Submitting vote...");
 
         try {
@@ -50,11 +48,9 @@ export default function FeedbackList({
             }
             const data = await response.json();
 
-            // Dismiss loading toast and show success
             toast.dismiss(loadingToast);
             toast.success(data.voted ? "Vote added!" : "Vote removed");
 
-            // Update local state
             setPosts(
                 posts.map((post) => {
                     if (post.id === postId) {
@@ -74,7 +70,6 @@ export default function FeedbackList({
             );
         } catch (error) {
             console.error("Failed to submit vote.", error);
-            // Dismiss loading toast and show success
             toast.dismiss(loadingToast);
             toast.error("Failed to submit vote. Please try again");
         }
@@ -118,7 +113,6 @@ export default function FeedbackList({
                                         </Badge>
                                     );
                                 })()}
-                                {/* Category Badge */}
                                 {(() => {
                                     const design = getCategoryDesign(post.category);
                                     const Icon = design.icon;
@@ -147,8 +141,8 @@ export default function FeedbackList({
                             >
                                 <ThumbsUp
                                     className={`h-4 w-4 ${post.votes.some((v: any) => v.userId === userId)
-                                            ? "fill-current"
-                                            : ""
+                                        ? "fill-current"
+                                        : ""
                                         }`}
                                 />
                                 {post.votes.length} Votes

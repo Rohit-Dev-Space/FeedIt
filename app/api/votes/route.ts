@@ -18,7 +18,6 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Check if vote already exists
         const existingVote = await prisma.vote.findUnique({
             where: {
                 userId_postId: {
@@ -29,7 +28,6 @@ export async function POST(request: NextRequest) {
         });
 
         if (existingVote) {
-            // Remove vote (toggle)
             await prisma.vote.delete({
                 where: {
                     id: existingVote.id,
@@ -37,7 +35,6 @@ export async function POST(request: NextRequest) {
             });
             return NextResponse.json({ voted: false });
         } else {
-            // Add vote (toggle)
             await prisma.vote.create({
                 data: {
                     userId: dbUser.id,
